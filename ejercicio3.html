@@ -40,24 +40,26 @@
 
     var resultado = document.querySelector('.resultado');
 
-    sumar.addEventListener('click', function() {
-        const valor1 = document.getElementById('valor1').value;
-        const valor2 = document.getElementById('valor2').value;
-        obtenerResultado('suma', valor1, valor2);
-
-    });
-
-    restar.addEventListener('click', function() {
-        const valor1 = document.getElementById('valor1').value;
-        const valor2 = document.getElementById('valor2').value;
-        obtenerResultado('resta', valor1, valor2);
+    [sumar, restar].forEach(boton => {
+        boton.addEventListener('click', function() {
+            const valor1 = document.getElementById('valor1').value;
+            const valor2 = document.getElementById('valor2').value;
+            if(boton.id == 'btn-sumar'){
+                obtenerResultado('suma', valor1, valor2);
+            }
+            else{
+                obtenerResultado('resta', valor1, valor2);
+            }
+        });
     });
 
     const obtenerResultado = (operacion, valor1, valor2) => {
-        const num1 = parseFloat(valor1);
-        const num2 = parseFloat(valor2);
+        const regex = /\D/;
 
-        if (!isNaN(num1) && !isNaN(num2)){
+        if (!regex.test(valor1) && !regex.test(valor2)){
+            const num1 = parseFloat(valor1);
+            const num2 = parseFloat(valor2);
+            
             if(operacion == 'suma'){
                 resultado.textContent = num1 + num2
             }
