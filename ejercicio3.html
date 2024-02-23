@@ -35,7 +35,48 @@
         </div>
     </div>
     <script>
-    // Escríbe aquí tu código
+    const sumar = document.getElementById('btn-sumar');
+    const restar = document.getElementById('btn-restar');
+
+    var resultado = document.querySelector('.resultado');
+
+    sumar.addEventListener('click', function() {
+        const valor1 = document.getElementById('valor1').value;
+        const valor2 = document.getElementById('valor2').value;
+        obtenerResultado('suma', valor1, valor2);
+
+    });
+
+    restar.addEventListener('click', function() {
+        const valor1 = document.getElementById('valor1').value;
+        const valor2 = document.getElementById('valor2').value;
+        obtenerResultado('resta', valor1, valor2);
+    });
+
+    const obtenerResultado = (operacion, valor1, valor2) => {
+        const num1 = parseFloat(valor1);
+        const num2 = parseFloat(valor2);
+
+        if (!isNaN(num1) && !isNaN(num2)){
+            if(operacion == 'suma'){
+                resultado.textContent = num1 + num2
+            }
+            else{
+                resResta = num1 - num2
+                if(resResta < 0 ){
+                    resultado.textContent = 0;
+                }
+                else{
+                    resultado.textContent = resResta;
+                }
+                
+            }
+        }
+        else{
+            resultado.textContent = 'Ingrese números válidos'
+        }     
+    }
+
     </script>
 </body>
 
