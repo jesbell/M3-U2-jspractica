@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 1</title>
+</head>
+
+<body>
+    <div>
+        <div style="width: 40%;margin: 0 auto">
+            <h2>
+                Escríbenos !!!
+            </h2>
+            <div class="resultado" style="color:green;font-style: italic">
+            </div>
+            <form id="formulario">
+                <div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Nombre completo
+                        </label>
+                        <input id="nombre" type="text">
+                        <p class="errorNombre" style="color:red;font-style: italic;"></p>
+                    </div>
+                    <div style="display: flex;flex-direction: column;">
+                        <label>
+                            Asunto
+                        </label>
+                        <input id="asunto" type="text">
+                        <p class="errorAsunto" style="color:red;font-style: italic;"></p>
+                    </div>
+                </div>
+                <div style="display: flex;flex-direction: column;">
+                    <label>
+                        Mensaje
+                    </label>
+                    <textarea id="mensaje"></textarea>
+                    <p class="errorMensaje" style="color:red;font-style: italic;"></p>
+                </div>
+                <div>
+                    <button id="botton" type="submit">
+                        Envíar mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        const resultado = document.querySelector('.resultado');
+        const errorAsunto = document.querySelector('.errorAsunto');
+        const errorMensaje = document.querySelector('.errorMensaje');
+        const errorNombre = document.querySelector('.errorNombre');
+
+        document.getElementById("formulario")
+        .addEventListener("submit", function (event) {
+
+            var valido = true;
+
+            errorNombre.textContent = "";
+            errorAsunto.textContent = "";
+            errorMensaje.textContent = "";
+            resultado.textContent = "";
+
+            const nombre = document.getElementById('nombre').value;
+            const asunto = document.getElementById('asunto').value;
+            const mensaje = document.getElementById('mensaje').value;
+            var regex = /^[A-Za-z\s]+$/;
+
+
+            if (nombre === "") {
+                errorNombre.textContent = "El nombre es requerido";
+                valido = false;
+            }
+            else if(!regex.test(nombre)){
+                errorNombre.textContent = "Ingrese caracteres de la A a la Z";
+                valido = false;
+            }
+
+            if (asunto === "") {
+                errorAsunto.textContent = "El asunto es requerido";
+                valido = false;
+            }
+            else if(!regex.test(asunto)){
+                errorAsunto.textContent = "Ingrese caracteres de la A a la Z";
+                valido = false;
+            }
+
+            if (mensaje === "") {
+                errorMensaje.textContent = "El mensaje es requerido";
+                valido = false;
+            }
+            else if(!regex.test(mensaje)){
+                errorMensaje.textContent = "Ingrese caracteres de la A a la Z";
+                valido = false;
+            }
+
+            if(valido){
+                resultado.textContent = "Mensaje Enviado con éxito!! 😎";
+            }
+
+            event.preventDefault();
+        });
+    </script>
+</body>
+
+</html>
